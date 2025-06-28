@@ -1,5 +1,5 @@
 # =======================================================================
-# Unit Tests Workflow
+# Daily Tests Workflow
 # =======================================================================
 #
 # This workflow runs unit tests for the console-table-printer and simple-wcswidth 
@@ -17,7 +17,7 @@
 #
 # =======================================================================
 
-name: Unit Tests
+name: Daily Tests
 
 on:
   schedule:
@@ -30,8 +30,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  unit-tests:
-    name: Unit Tests (Node ${{ matrix.node-version }})
+  daily-tests:
+    name: Daily Tests (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:

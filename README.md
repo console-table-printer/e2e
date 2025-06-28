@@ -1,6 +1,6 @@
 # E2E Tests for console-table-printer and simple-wcswidth
 
-![Unit Tests](https://github.com/console-table-printer/e2e/workflows/Unit%20Tests/badge.svg)
+![Daily Tests](https://github.com/console-table-printer/e2e/workflows/Daily%20Tests/badge.svg)
 ![Node.js 16 Tests](https://github.com/console-table-printer/e2e/workflows/Node.js%2016%20Tests/badge.svg)
 
 This repository contains end-to-end tests for the [console-table-printer](https://github.com/ayonious/console-table-printer) and [simple-wcswidth](https://github.com/ayonious/simple-wcswidth) packages.
