@@ -50,10 +50,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Install specific Jest version that's compatible with Node.js 16
           yarn add jest@29.5.0 ts-jest@29.1.0 @types/jest@29.5.0 --dev
+          # Install without considering yarn.lock to ensure our custom Jest version is actually used
           yarn install --no-lockfile
+
       - name: Run unit tests
-        run: yarn test:unit
+        run: yarn test
 
       - name: Upload test results
         if: always()
