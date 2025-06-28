@@ -52,7 +52,8 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run E2E tests
-        run: yarn test:e2e || true  # Continue even if E2E tests fail (website might change)
+        run: yarn test:e2e
+        continue-on-error: true  # Continue workflow even if E2E tests fail, but mark step as failed
 
       - name: Upload test results
         if: always()

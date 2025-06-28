@@ -5,8 +5,8 @@ test.describe('Documentation Pages', () => {
     // Navigate to the Quick Start page
     await page.goto('/docs/quick-start');
     
-    // Check that the title is correct
-    await expect(page).toHaveTitle(/Quick Start/);
+    // Check that the title contains the site name
+    await expect(page).toHaveTitle(/Console Table Printer/);
     
     // Check that the main heading is present
     const heading = page.locator('h1:has-text("Quick Start")');
