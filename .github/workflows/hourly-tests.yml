@@ -11,7 +11,7 @@
 # - Tests run on all supported Node.js versions
 #
 # The workflow runs:
-# - Hourly (via cron)
+# - Daily at 00:00 UTC
 # - On push to main branch
 # - Manually via workflow_dispatch
 #
@@ -21,8 +21,8 @@ name: Unit Tests
 
 on:
   schedule:
-    # Run every hour
-    - cron: '0 * * * *'
+    # Run once a day at midnight UTC
+    - cron: '0 0 * * *'
   # Also run on push to main branch
   push:
     branches: [ main ]
