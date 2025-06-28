@@ -50,11 +50,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Remove incompatible Jest 30.x
-          yarn remove jest
-          # Install Jest 29.x which is compatible with Node.js 16
-          yarn add jest@29 --dev
-
+          yarn add jest@29.5.0 ts-jest@29.1.0 @types/jest@29.5.0 --dev
+          yarn install --no-lockfile
       - name: Run unit tests
         run: yarn test:unit
 
