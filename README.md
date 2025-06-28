@@ -19,25 +19,14 @@ This repository contains end-to-end tests for the [console-table-printer](https:
 - **Type Checking**: Ensure that exported types are correctly defined and usable
 - **TypeScript Integration**: Test both libraries working together in a TypeScript environment
 
-### Website Tests (Playwright)
-
-- Tests for the [console-table-printer website](https://console-table.netlify.app/)
-- Verifies homepage content, navigation, and documentation pages
-
 ## Running Tests
 
 ```bash
 # Install dependencies
 yarn
 
-# Run JavaScript and TypeScript unit tests
+# Run unit tests
 yarn test
-
-# Run website E2E tests
-yarn test:e2e
-
-# Run all tests
-yarn test:all
 ```
 
 ## Test Structure
