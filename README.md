@@ -1,6 +1,7 @@
 # E2E Tests for console-table-printer and simple-wcswidth
 
 ![Hourly Tests](https://github.com/console-table-printer/e2e/workflows/Hourly%20Tests/badge.svg)
+![Node.js 16 Tests](https://github.com/console-table-printer/e2e/workflows/Node.js%2016%20Tests/badge.svg)
 
 This repository contains end-to-end tests for the [console-table-printer](https://github.com/ayonious/console-table-printer) and [simple-wcswidth](https://github.com/ayonious/simple-wcswidth) packages.
 
@@ -56,7 +57,9 @@ This repository uses GitHub Actions to run tests automatically:
 
 - Tests run hourly to ensure continuous compatibility
 - Tests run on every push to the main branch
-- Unit tests run on multiple Node.js versions (16.x, 18.x, 20.x, 22.x, 24.x)
+- Unit tests run on multiple Node.js versions:
+  - Node.js 16.x (using Jest 29.x for compatibility)
+  - Node.js 18.x, 20.x, 22.x, 24.x (using Jest 30.x)
 - E2E tests run after unit tests pass
 - Manual test runs can be triggered from the Actions tab in GitHub
 

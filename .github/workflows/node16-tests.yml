@@ -1,0 +1,45 @@
+name: Node.js 16 Tests
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  # Also run on push to main branch
+  push:
+    branches: [ main ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  node16-tests:
+    name: Node.js 16.x Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          # Remove incompatible Jest 30.x
+          yarn remove jest
+          # Install Jest 29.x which is compatible with Node.js 16
+          yarn add jest@29 --dev
+
+      - name: Run unit tests
+        run: yarn test:unit
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: node16-test-results
+          path: |
+            junit.xml
+          retention-days: 7 
