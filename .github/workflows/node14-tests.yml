@@ -1,0 +1,68 @@
+# =======================================================================
+# Node.js 14 Compatibility Tests Workflow
+# =======================================================================
+#
+# This workflow specifically tests the compatibility of console-table-printer 
+# and simple-wcswidth packages with Node.js 14.x.
+#
+# Since Jest 30.x is not compatible with Node.js 14.x, this workflow:
+# 1. Removes Jest 30.x
+# 2. Installs Jest 29.x which is compatible with Node.js 14
+# 3. Runs the unit tests
+#
+# This ensures that users on Node.js 14.x can still use these libraries
+# even though the latest testing tools may not support this version.
+#
+# The workflow runs:
+# - Hourly (via cron)
+# - On push to main branch
+# - Manually via workflow_dispatch
+#
+# Test results are uploaded as artifacts and stored for 7 days.
+# =======================================================================
+
+name: Node.js 14 Tests
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  # Also run on push to main branch
+  push:
+    branches: [ main ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  node14-tests:
+    name: Node.js 14.x Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 14.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          # Remove incompatible Jest 30.x
+          yarn remove jest
+          # Install Jest 29.x which is compatible with Node.js 14
+          yarn add jest@29 --dev
+
+      - name: Run unit tests
+        run: yarn test:unit
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: node14-test-results
+          path: |
+            junit.xml
+          retention-days: 7 

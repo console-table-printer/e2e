@@ -6,7 +6,9 @@
 # packages on multiple Node.js versions (18.x, 20.x, 22.x, 24.x).
 #
 # It performs:
-# - Unit tests on all supported Node.js versions
+# - JavaScript unit tests
+# - TypeScript import and type tests
+# - Tests run on all supported Node.js versions
 #
 # The workflow runs:
 # - Hourly (via cron)
@@ -48,5 +50,5 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run unit tests
-        run: yarn test:unit 
+      - name: Run JavaScript and TypeScript tests
+        run: yarn test 
