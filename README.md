@@ -56,6 +56,8 @@ This repository uses GitHub Actions to run tests automatically:
 
 - Tests run hourly to ensure continuous compatibility
 - Tests run on every push to the main branch
+- Unit tests run on multiple Node.js versions (16.x, 18.x, 20.x)
+- E2E tests run after unit tests pass
 - Manual test runs can be triggered from the Actions tab in GitHub
 
 Test results and artifacts are stored for 7 days and can be downloaded from the GitHub Actions workflow runs.
