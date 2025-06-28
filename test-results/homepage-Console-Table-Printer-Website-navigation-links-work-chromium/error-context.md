@@ -1,0 +1,68 @@
+# Page snapshot
+
+```yaml
+- region "Skip to main content":
+  - link "Skip to main content":
+    - /url: "#__docusaurus_skipToContent_fallback"
+- banner:
+  - text: ⭐️ If you like Console Table Printer, give it a star on
+  - link "GitHub":
+    - /url: https://github.com/console-table-printer/console-table-printer
+  - text: "! ⭐️"
+  - button "Close":
+    - img
+- navigation "Main":
+  - link "CTP Console Table Printer":
+    - /url: /
+    - img "CTP"
+    - text: Console Table Printer
+  - link "GitHub":
+    - /url: https://github.com/console-table-printer/console-table-printer
+  - link "npmjs":
+    - /url: https://www.npmjs.com/package/console-table-printer
+  - button "Switch between dark and light mode (currently light mode)"
+- main:
+  - heading "CTP Logo Print colorful Tables on Console, directly from JSON string" [level=1]:
+    - img "CTP Logo"
+    - text: Print colorful Tables on Console, directly from JSON string
+  - link "GET STARTED":
+    - /url: /docs
+  - img "[object Object]"
+  - heading "Light and Fast" [level=3]
+  - paragraph: It contains very minimal dependencies.
+  - img "[object Object]"
+  - heading "Free" [level=3]
+  - paragraph: Console Table Printer is free and open source under MIT license. It has very minimal dependencies
+  - img "[object Object]"
+  - heading "Typed" [level=3]
+  - paragraph: Use it happily with typescript and Javascript
+- contentinfo:
+  - text: Learn
+  - list:
+    - listitem:
+      - link "Quick Start":
+        - /url: /docs
+    - listitem:
+      - link "Getting Started With CLI":
+        - /url: /docs/doc-cli-install-quick-start
+  - text: Decorate
+  - list:
+    - listitem:
+      - link "Color":
+        - /url: /docs/doc-color
+    - listitem:
+      - link "Border":
+        - /url: /docs/doc-border-design
+    - listitem:
+      - link "Alignment":
+        - /url: /docs/doc-alignment
+  - text: More
+  - list:
+    - listitem:
+      - link "GitHub":
+        - /url: https://github.com/console-table-printer/console-table-printer
+    - listitem:
+      - link "Npmjs":
+        - /url: https://www.npmjs.com/package/console-table-printer
+  - text: Copyright © 2025 Nahiyan Kamal under MIT License. Built with Docusaurus.
+```

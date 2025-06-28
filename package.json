@@ -1,0 +1,33 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest",
+    "test:e2e": "playwright test",
+    "test:all": "yarn test:unit && yarn test:e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/console-table-printer/e2e.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/console-table-printer/e2e/issues"
+  },
+  "homepage": "https://github.com/console-table-printer/e2e#readme",
+  "dependencies": {
+    "console-table-printer": "^2.14.6",
+    "jest": "^30.0.3",
+    "simple-wcswidth": "^1.1.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "playwright": "^1.53.1"
+  }
+}
