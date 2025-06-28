@@ -49,10 +49,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Install specific Jest version that's compatible with Node.js 12
-          yarn add jest@27.5.1 ts-jest@27.1.5 @types/jest@27.5.2 --dev
-          # Install TypeScript version compatible with Node.js 12
-          yarn add typescript@4.5.5 --dev
+          # Install specific Jest/TS version that's compatible with Node.js 12
+          yarn add jest@27.5.1 ts-jest@27.1.5 @types/jest@27.5.2 typescript@4.5.5 --dev
           # Install without considering yarn.lock to ensure our custom Jest version is actually used
           yarn install --no-lockfile
 
