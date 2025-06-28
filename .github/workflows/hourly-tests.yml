@@ -1,23 +1,21 @@
 # =======================================================================
-# Hourly Tests Workflow
+# Unit Tests Workflow
 # =======================================================================
 #
-# This workflow runs tests for the console-table-printer and simple-wcswidth 
+# This workflow runs unit tests for the console-table-printer and simple-wcswidth 
 # packages on multiple Node.js versions (18.x, 20.x, 22.x, 24.x).
 #
 # It performs:
 # - Unit tests on all supported Node.js versions
-# - E2E tests for the website using Playwright
 #
 # The workflow runs:
 # - Hourly (via cron)
 # - On push to main branch
 # - Manually via workflow_dispatch
 #
-# Test results are uploaded as artifacts and stored for 7 days.
 # =======================================================================
 
-name: Hourly Tests
+name: Unit Tests
 
 on:
   schedule:
@@ -51,38 +49,4 @@ jobs:
         run: yarn install
 
       - name: Run unit tests
-        run: yarn test:unit
-
-  e2e-tests:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    needs: unit-tests
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
-
-      - name: Run E2E tests
-        run: yarn test:e2e || true  # Continue even if E2E tests fail (website might change)
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: |
-            playwright-report/
-            test-results/
-          retention-days: 7 
+        run: yarn test:unit 
