@@ -18,7 +18,6 @@
 # - On push to main branch
 # - Manually via workflow_dispatch
 #
-# Test results are uploaded as artifacts and stored for 7 days.
 # =======================================================================
 
 name: Node.js 14 Tests
@@ -50,19 +49,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Remove incompatible Jest 30.x
-          yarn remove jest
-          # Install Jest 29.x which is compatible with Node.js 14
-          yarn add jest@29 --dev
+          # Install specific Jest version that's compatible with Node.js 14
+          yarn add jest@29.5.0 ts-jest@29.1.0 @types/jest@29.5.0 --dev
+          # Install without considering yarn.lock to ensure our custom Jest version is actually used
+          yarn install --no-lockfile
 
       - name: Run unit tests
-        run: yarn test
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: node14-test-results
-          path: |
-            junit.xml
-          retention-days: 7 
+        run: yarn test 
