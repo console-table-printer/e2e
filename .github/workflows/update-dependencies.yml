@@ -1,10 +1,11 @@
 # This workflow updates all dependencies to their latest versions
 # 
 # It performs the following steps:
-# 1. Removes the yarn.lock file
-# 2. Updates all dependencies in package.json to use wildcard "*" versions
-# 3. Runs yarn install to generate a new lock file with latest versions
-# 4. Commits and pushes the changes to the main branch
+# 1. Creates a script to check for the latest versions of all dependencies
+# 2. Updates package.json with the latest versions
+# 3. Removes the yarn.lock file
+# 4. Runs yarn install to generate a new lock file with latest versions
+# 5. Commits and pushes the changes to the main branch
 #
 # To run this workflow:
 # 1. Go to Actions tab in the repository
@@ -38,13 +39,55 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Remove lock file
-        run: rm -f yarn.lock
+      - name: Create update script
+        run: |
+          cat > update-deps.js << 'EOF'
+          const fs = require('fs');
+          const { execSync } = require('child_process');
+
+          // Read the package.json file
+          const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+          
+          // Function to get the latest version of a package
+          function getLatestVersion(packageName) {
+            try {
+              const output = execSync(`npm view ${packageName} version`).toString().trim();
+              console.log(`${packageName}: latest version is ${output}`);
+              return output;
+            } catch (error) {
+              console.error(`Error getting latest version for ${packageName}:`, error.message);
+              return null;
+            }
+          }
+          
+          // Update dependencies
+          console.log('Updating dependencies...');
+          for (const dep in packageJson.dependencies) {
+            const latestVersion = getLatestVersion(dep);
+            if (latestVersion) {
+              packageJson.dependencies[dep] = `^${latestVersion}`;
+            }
+          }
+          
+          // Update devDependencies
+          console.log('\nUpdating devDependencies...');
+          for (const dep in packageJson.devDependencies) {
+            const latestVersion = getLatestVersion(dep);
+            if (latestVersion) {
+              packageJson.devDependencies[dep] = `^${latestVersion}`;
+            }
+          }
+          
+          // Write the updated package.json
+          fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2) + '\n');
+          console.log('\nPackage.json updated with latest versions.');
+          EOF
 
       - name: Update dependencies
-        run: |
-          npm pkg set dependencies="$(npm pkg get dependencies | jq 'to_entries | map(.value = "*") | from_entries')"
-          npm pkg set devDependencies="$(npm pkg get devDependencies | jq 'to_entries | map(.value = "*") | from_entries')"
+        run: node update-deps.js
+
+      - name: Remove lock file
+        run: rm -f yarn.lock
 
       - name: Install dependencies
         run: yarn install
