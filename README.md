@@ -7,17 +7,16 @@ This repository contains end-to-end tests for the [console-table-printer](https:
 
 ## Test Types
 
-### Unit Tests (Jest)
+### JavaScript Tests (Jest)
 
 - **console-table-printer**: Tests for basic and advanced table functionality
 - **simple-wcswidth**: Tests for character width calculation with various character sets
-- **Integration**: Tests that combine both libraries to ensure they work well together
+- **Types**: Tests for proper exports and type definitions
 
 ### TypeScript Tests
 
 - **TypeScript Import Tests**: Verify that both packages can be properly imported in TypeScript
 - **Type Checking**: Ensure that exported types are correctly defined and usable
-- **TypeScript Integration**: Test both libraries working together in a TypeScript environment
 
 ## Running Tests
 
@@ -25,7 +24,7 @@ This repository contains end-to-end tests for the [console-table-printer](https:
 # Install dependencies
 yarn
 
-# Run unit tests
+# Run all tests
 yarn test
 ```
 
@@ -33,37 +32,43 @@ yarn test
 
 ```
 tests/
-├── console-table-printer/   # JavaScript unit tests for console-table-printer
-│   ├── basic.test.js
-│   └── advanced.test.js
-├── simple-wcswidth/         # JavaScript unit tests for simple-wcswidth
-│   ├── basic.test.js
-│   └── advanced.test.js
-├── integration/             # JavaScript integration tests
-│   └── combined.test.js
-└── typescript/              # TypeScript tests
-    ├── console-table-printer/
-    │   ├── basic.test.ts
-    │   └── advanced.test.ts
-    ├── simple-wcswidth/
-    │   ├── basic.test.ts
-    │   └── advanced.test.ts
-    └── integration/
-        └── combined.test.ts
+├── console-table-printer/   # Tests for console-table-printer
+│   ├── basic.test.js        # JavaScript basic tests
+│   ├── advanced.test.js     # JavaScript advanced tests
+│   ├── types.test.js        # JavaScript type exports tests
+│   ├── basic.test.ts        # TypeScript basic tests
+│   ├── advanced.test.ts     # TypeScript advanced tests
+│   └── types.test.ts        # TypeScript type definitions tests
+└── simple-wcswidth/         # Tests for simple-wcswidth
+    ├── basic.test.js        # JavaScript basic tests
+    ├── advanced.test.js     # JavaScript advanced tests
+    ├── types.test.js        # JavaScript type exports tests
+    ├── basic.test.ts        # TypeScript basic tests
+    ├── advanced.test.ts     # TypeScript advanced tests
+    └── types.test.ts        # TypeScript type definitions tests
 ```
 
 ## Automated Testing
 
 This repository uses GitHub Actions to run tests automatically:
 
-- Tests run daily at midnight UTC to ensure continuous compatibility
-- Tests run on every push to the main branch
-- Unit tests run on multiple Node.js versions:
-  - Node.js 12.x (using Jest 27.x for compatibility)
-  - Node.js 14.x (using Jest 29.x for compatibility)
-  - Node.js 16.x (using Jest 29.x for compatibility)
-  - Node.js 18.x, 20.x, 22.x, 24.x (using Jest 30.x)
-- E2E tests run separately using Playwright
-- Manual test runs can be triggered from the Actions tab in GitHub
+- Tests run daily via the daily-tests workflow
+- Tests run on multiple Node.js versions:
+  - Node.js 12.x (via node12-tests workflow)
+  - Node.js 14.x (via node14-tests workflow)
+  - Node.js 16.x (via node16-tests workflow)
+- Dependencies are automatically updated via the update-dependencies workflow
 
-Test results and artifacts are stored for 7 days and can be downloaded from the GitHub Actions workflow runs.
+### Node.js Compatibility
+
+- The test suite is compatible with Node.js versions 12, 14, and 16
+- For newer Node.js versions (18+), all tests should run without issues
+- Note: Some testing tools may have specific Node.js version requirements
+
+## Contributing
+
+If you'd like to contribute to these tests, please submit a pull request with your changes.
+
+## License
+
+ISC
