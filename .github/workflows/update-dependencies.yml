@@ -3,9 +3,10 @@
 # It performs the following steps:
 # 1. Creates a script to check for the latest versions of all dependencies
 # 2. Updates package.json with the latest versions
-# 3. Removes the yarn.lock file
-# 4. Runs yarn install to generate a new lock file with latest versions
-# 5. Commits and pushes the changes to the main branch
+# 3. Validates and fixes the package.json structure if needed
+# 4. Removes the yarn.lock file
+# 5. Runs yarn install to generate a new lock file with latest versions
+# 6. Commits and pushes the changes to the main branch
 #
 # To run this workflow:
 # 1. Go to Actions tab in the repository
@@ -85,6 +86,86 @@ jobs:
 
       - name: Update dependencies
         run: node update-deps.js
+
+      - name: Create validation script
+        run: |
+          cat > validate-package-json.js << 'EOF'
+          const fs = require('fs');
+
+          try {
+            // Read the package.json file
+            const packageJsonPath = './package.json';
+            const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf8');
+            
+            console.log('Reading package.json...');
+            
+            // Parse the JSON to validate it
+            let packageJson;
+            try {
+              packageJson = JSON.parse(packageJsonContent);
+              console.log('Package.json is valid JSON.');
+            } catch (parseError) {
+              console.error('Error parsing package.json:', parseError.message);
+              process.exit(1);
+            }
+            
+            // Check for numeric keys in dependencies or devDependencies
+            const hasNumericKeys = Object.keys(packageJson.dependencies || {}).some(key => !isNaN(key)) || 
+                                  Object.keys(packageJson.devDependencies || {}).some(key => !isNaN(key));
+            
+            if (hasNumericKeys) {
+              console.error('Found numeric keys in dependencies or devDependencies. This indicates corruption.');
+              
+              // Filter out numeric keys
+              const cleanDependencies = {};
+              const cleanDevDependencies = {};
+              
+              Object.entries(packageJson.dependencies || {}).forEach(([key, value]) => {
+                if (isNaN(key)) {
+                  cleanDependencies[key] = value;
+                } else {
+                  console.log(`Removing numeric dependency key: ${key}`);
+                }
+              });
+              
+              Object.entries(packageJson.devDependencies || {}).forEach(([key, value]) => {
+                if (isNaN(key)) {
+                  cleanDevDependencies[key] = value;
+                } else {
+                  console.log(`Removing numeric devDependency key: ${key}`);
+                }
+              });
+              
+              // Update the package.json object
+              packageJson.dependencies = cleanDependencies;
+              packageJson.devDependencies = cleanDevDependencies;
+              
+              // Write the fixed package.json
+              fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
+              console.log('Fixed package.json and saved.');
+            } else {
+              console.log('No numeric keys found. Package.json structure looks good.');
+            }
+            
+            // Print the current dependencies
+            console.log('\nCurrent dependencies:');
+            Object.entries(packageJson.dependencies || {}).forEach(([key, value]) => {
+              console.log(`  ${key}: ${value}`);
+            });
+            
+            console.log('\nCurrent devDependencies:');
+            Object.entries(packageJson.devDependencies || {}).forEach(([key, value]) => {
+              console.log(`  ${key}: ${value}`);
+            });
+            
+          } catch (error) {
+            console.error('Error:', error.message);
+            process.exit(1);
+          }
+          EOF
+
+      - name: Validate package.json
+        run: node validate-package-json.js
 
       - name: Remove lock file
         run: rm -f yarn.lock
