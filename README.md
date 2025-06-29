@@ -41,18 +41,15 @@ tests/
 │   └── advanced.test.js
 ├── integration/             # JavaScript integration tests
 │   └── combined.test.js
-├── typescript/              # TypeScript tests
-│   ├── console-table-printer/
-│   │   ├── basic.test.ts
-│   │   └── advanced.test.ts
-│   ├── simple-wcswidth/
-│   │   ├── basic.test.ts
-│   │   └── advanced.test.ts
-│   └── integration/
-│       └── combined.test.ts
-└── website/                 # Website E2E tests with Playwright
-    ├── homepage.test.js
-    └── docs.test.js
+└── typescript/              # TypeScript tests
+    ├── console-table-printer/
+    │   ├── basic.test.ts
+    │   └── advanced.test.ts
+    ├── simple-wcswidth/
+    │   ├── basic.test.ts
+    │   └── advanced.test.ts
+    └── integration/
+        └── combined.test.ts
 ```
 
 ## Automated Testing
