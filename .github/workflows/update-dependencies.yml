@@ -1,0 +1,45 @@
+name: Update Dependencies
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Commit message'
+        required: false
+        default: 'fix: Update dependencies'
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Remove lock file
+        run: rm -f yarn.lock
+
+      - name: Update dependencies
+        run: |
+          npm pkg set dependencies="$(npm pkg get dependencies | jq 'to_entries | map(.value = "*") | from_entries')"
+          npm pkg set devDependencies="$(npm pkg get devDependencies | jq 'to_entries | map(.value = "*") | from_entries')"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions-bot@users.noreply.github.com'
+
+      - name: Commit and push changes
+        run: |
+          git add yarn.lock package.json
+          git commit -m "${{ github.event.inputs.commit_message || 'fix: Update dependencies' }}"
+          git push origin HEAD:main 
