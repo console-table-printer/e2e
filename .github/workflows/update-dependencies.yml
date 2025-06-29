@@ -1,3 +1,19 @@
+# This workflow updates all dependencies to their latest versions
+# 
+# It performs the following steps:
+# 1. Removes the yarn.lock file
+# 2. Updates all dependencies in package.json to use wildcard "*" versions
+# 3. Runs yarn install to generate a new lock file with latest versions
+# 4. Commits and pushes the changes to the main branch
+#
+# To run this workflow:
+# 1. Go to Actions tab in the repository
+# 2. Select "Update Dependencies" workflow
+# 3. Click "Run workflow"
+# 4. Optionally customize the commit message
+#
+# Note: This requires write permissions to the repository
+
 name: Update Dependencies
 
 on:
