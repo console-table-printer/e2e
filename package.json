@@ -19,13 +19,13 @@
   },
   "homepage": "https://github.com/console-table-printer/e2e#readme",
   "dependencies": {
-    "console-table-printer": "^2.14.6",
-    "jest": "^30.0.3",
+    "console-table-printer": "^2.15.0",
+    "jest": "^30.2.0",
     "simple-wcswidth": "^1.1.2"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "ts-jest": "^29.4.0",
-    "typescript": "^5.8.3"
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
   }
 }
