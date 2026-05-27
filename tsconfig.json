@@ -9,10 +9,11 @@
     "outDir": "./dist",
     "declaration": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest", "node"]
   },
   "include": [
-    "tests/typescript/**/*.ts"
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules"
