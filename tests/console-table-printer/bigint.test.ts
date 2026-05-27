@@ -113,4 +113,32 @@ describe('Console Table Printer - BigInt input', () => {
     // Raw BigInt values cannot be rendered: JSON.stringify throws on them.
     expect(() => p.render()).toThrow(/serialize a BigInt/);
   });
+
+  test('prints a formatted table of BigInt values to the console', () => {
+    const p = new Table({
+      title: 'BigInt values (raw)',
+      columns: [
+        { name: 'index', alignment: 'right', color: 'cyan' },
+        { name: 'value', alignment: 'right' },
+        { name: 'note', alignment: 'left', color: 'yellow' }
+      ]
+    });
+
+    p.addRow({ index: 0, value: 0n, note: 'zero' });
+    p.addRow({ index: 1, value: -1n, note: 'negative' });
+    p.addRow({ index: 2, value: HUGE, note: '2^53 + 1' });
+    p.addRow({ index: 3, value: 2n ** 64n, note: '2^64' });
+    p.addRow({
+      index: 4,
+      value: 123123123918239810923809123n,
+      note: 'arbitrary precision'
+    });
+
+    // Actually print the rendered table so it shows up in the test output.
+    p.printTable();
+
+    const out = p.render();
+    expect(out).toContain('9007199254740993');
+    expect(out).toContain('18446744073709551616');
+  });
 });
