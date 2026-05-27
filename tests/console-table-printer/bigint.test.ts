@@ -15,7 +15,7 @@ describe('Console Table Printer - BigInt input', () => {
     );
 
     const output = table.render();
-
+    table.printTable();
     for (const value of BIGINT_VALUES) {
       expect(output).toContain(value.toString());
     }
@@ -24,7 +24,7 @@ describe('Console Table Printer - BigInt input', () => {
 
   test('prints raw BigInt values in the table', () => {
     const table = new Table();
-    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+    const logSpy = jest.spyOn(console, 'log');
 
     table.addRows(
       BIGINT_VALUES.map((value, index) => ({
@@ -42,7 +42,7 @@ describe('Console Table Printer - BigInt input', () => {
     for (const value of BIGINT_VALUES) {
       expect(printedTable).toContain(value.toString());
     }
-
+    
     logSpy.mockRestore();
   });
 
@@ -51,6 +51,7 @@ describe('Console Table Printer - BigInt input', () => {
 
     table.addRow({ Bigint: PRECISE_BIGINT, label: 'precise' });
 
+    table.printTable();
     const output = table.render();
 
     expect(output).toContain(PRECISE_BIGINT.toString());
@@ -68,6 +69,7 @@ describe('Console Table Printer - BigInt input', () => {
     );
 
     const output = table.render();
+    table.printTable();
 
     for (const value of BIGINT_VALUES) {
       expect(output).toContain(value.toString());
