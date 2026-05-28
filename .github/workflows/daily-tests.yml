@@ -3,7 +3,7 @@
 # =======================================================================
 #
 # This workflow runs unit tests for the console-table-printer and simple-wcswidth 
-# packages on multiple Node.js versions (18.x, 20.x, 22.x, 24.x).
+# packages on multiple Node.js versions (18.x, 20.x, 22.x, 24.x, 26.x).
 #
 # It performs:
 # - JavaScript unit tests
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x, 24.x]
+        node-version: [18.x, 20.x, 22.x, 24.x,26.x]
 
     steps:
       - name: Checkout code
