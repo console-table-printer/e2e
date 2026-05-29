@@ -1,7 +1,6 @@
 # E2E Tests for console-table-printer and simple-wcswidth
 
 ![Daily Tests](https://github.com/console-table-printer/e2e/workflows/Daily%20Tests/badge.svg)
-![Node.js 12 Tests](https://github.com/console-table-printer/e2e/workflows/Node.js%2012%20Tests/badge.svg)
 ![Node.js 14 Tests](https://github.com/console-table-printer/e2e/workflows/Node.js%2014%20Tests/badge.svg)
 ![Node.js 16 Tests](https://github.com/console-table-printer/e2e/workflows/Node.js%2016%20Tests/badge.svg)
 

@@ -10,6 +10,7 @@ describe('console-table-printer exports', () => {
     expect(table).toBeInstanceOf(consolePrinter.Table);
     expect(typeof table.addRow).toBe('function');
     expect(typeof table.addRows).toBe('function');
+    expect(typeof table.clearRows).toBe('function');
     expect(typeof table.printTable).toBe('function');
   });
 

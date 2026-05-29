@@ -19,6 +19,7 @@ describe('console-table-printer TypeScript exports', () => {
     // Check that the Table class has the expected methods
     expect(typeof table.addRow).toBe('function');
     expect(typeof table.addRows).toBe('function');
+    expect(typeof table.clearRows).toBe('function');
     expect(typeof table.printTable).toBe('function');
     
     // Test the methods
@@ -27,6 +28,8 @@ describe('console-table-printer TypeScript exports', () => {
       { id: 2, name: 'Test 2' },
       { id: 3, name: 'Test 3' }
     ]);
+    const result: Table = table.clearRows();
+    expect(result).toBe(table);
     
     // If this compiles, the types are correct
     expect(true).toBe(true);

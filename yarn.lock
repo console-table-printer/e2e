@@ -1062,10 +1062,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
-console-table-printer@^2.15.3:
-  version "2.15.3"
-  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.15.3.tgz#dc5ad4af4e8b723c4dd2f893c8a0c6d6ccfbdbdc"
-  integrity sha512-4COV3+d6zksjyG7onhubXXyzKdtCfw6nz8Xtmn+SGlK+aXURPhsm9KGFRD4diqjhEkD/NTahyaZ322dxH00eCQ==
+console-table-printer@^2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.16.0.tgz#5a693b70c07d5da59fbc7138ff14a623ea0ce5e3"
+  integrity sha512-X46F33vlP/jVYT3ajukzmOea4Bxet/jRjBKY/fhqr0IvTUNdfBYlrh+Juk0eiZJaTJYrzlEd4RFMF5cQac+m/w==
   dependencies:
     simple-wcswidth "^1.1.2"
 
